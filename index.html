@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+   <head>
+      <title>I love you &#128149;</title>
+      <link rel="icon" href="./favicon_io/favicon.ico" type="image/x-icon">
+   </head>
    <body>
       <div class="container">
         <h1 id="headline">Countdown to seeing you :)</h1>
@@ -106,8 +110,8 @@
         let birthday = "Dec 16, 2021 14:00:00",
           countDown = new Date(birthday).getTime(),   
           x = setInterval(function () {
-            let now = new Date().getTime(),
-              distance = countDown - now;
+             let temp = new Date()
+              distance = countDown - temp.getTime() - temp.getTimezoneOffset()*minute + (8 * hour); // Makes it PST
        
             (document.getElementById("days").innerText = Math.floor(distance / day)),
               (document.getElementById("hours").innerText = Math.floor(
