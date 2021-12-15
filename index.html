@@ -12,10 +12,14 @@
 		<h1 id="headline">Countdown to seeing you :)</h1>
 		<div id="countdown">
 			<ul>
-				<li><span id="days"></span>days</li>
-				<li><span id="hours"></span>Hours</li>
-				<li><span id="minutes"></span>Minutes</li>
-				<li><span id="seconds"></span>Seconds</li>
+				<li id="daysDisp">
+               <span id="days"></span>days</li>
+				<li id="hourDisp">
+               <span id="hours"></span>Hours</li>
+				<li id="minsDisp">
+               <span id="minutes"></span>Minutes</li>
+				<li id="secsDisp">
+               <span id="seconds"></span>Seconds</li>
 			</ul>
 		</div>
 		<div class="message">
@@ -100,6 +104,7 @@
    }
 </style>
 
+
 <script>
 (function() {
    const second = 1000,
@@ -107,16 +112,51 @@
    hour = minute * 60,
    day = hour * 24;
 
-   let birthday = "Dec 16, 2021 14:00:00",
-   countDown = new Date(birthday).getTime(),
+   let dayVal, hourVal, minuteVal, secondVal;
+
+   let meetTime = "Dec 16, 2021 14:00:00",
+   countDown = new Date(meetTime).getTime(),
    x = setInterval(function() {
       let temp = new Date();
       distance = countDown - temp.getTime() - temp.getTimezoneOffset() * minute + 8 * hour; // Makes it PST
 
-      (document.getElementById("days")   .innerText = Math.floor( distance / day)             ),
-      (document.getElementById("hours")  .innerText = Math.floor((distance % day)    / hour  )),
-      (document.getElementById("minutes").innerText = Math.floor((distance % hour)   / minute)),
-      (document.getElementById("seconds").innerText = Math.floor((distance % minute) / second));
+      let dayOut = "<span>" + dayVal + "</span>days"
+      let hourOut = "<span>" + hourVal + "</span>hours"
+      let minuteOut = "<span>" + minuteVal + "</span>minutes"
+      let secondOut = "<span>" + secondVal + "</span>seconds"
+
+      dayVal = Math.floor(distance / day);
+      if (dayVal == 1) {
+         dayOut = dayOut.slice(0, -1);
+      }
+      (document.getElementById("daysDisp").innerHTML = dayOut);
+
+
+      hourVal = Math.floor((distance % day) / hour);
+      if (hourVal == 1) {
+         hourOut = hourOut.slice(0, -1)
+      }
+      (document.getElementById("hourDisp").innerHTML = hourOut);
+      
+
+      minuteVal = Math.floor((distance % hour) / minute);
+      if (minuteVal == 1) {
+         minuteOut = minuteOut.slice(0, -1);
+      }
+      (document.getElementById("minsDisp").innerHTML = minuteOut);
+
+      secondVal = Math.floor((distance % minute) / second);
+      if (secondVal == 1) {
+         secondOut = secondOut.slice(0, -1);
+      }
+      (document.getElementById("secsDisp").innerHTML = secondOut);
+      
+
+
+      // (document.getElementById("days")   .innerText = Math.floor( distance / day)             ),
+      // (document.getElementById("hours")  .innerText = Math.floor((distance % day)    / hour  )),
+      // (document.getElementById("minutes").innerText = Math.floor((distance % hour)   / minute)),
+      // (document.getElementById("seconds").innerText = Math.floor((distance % minute) / second));
 
       //do something later when date is reached
       if (distance < 0) {
@@ -130,6 +170,12 @@
 
          clearInterval(x);
       }
+
+      /*
+      if (Math.floor(distance/day) == 1) {
+         document.getElementById("days").innerText = 1
+         document.getElementById("test").innerText = "day"
+      }*/
    }, 0);
 })();
 </script>
