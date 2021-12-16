@@ -114,11 +114,11 @@
 
    let dayVal, hourVal, minuteVal, secondVal;
 
-   let meetTime = "Dec 16, 2021 12:15:00",
+   let meetTime = "July 28, 2021 16:30:00",
    countDown = new Date(meetTime).getTime(),
    x = setInterval(function() {
       let temp = new Date();
-      distance = countDown - temp.getTime() - temp.getTimezoneOffset() * minute + 8 * hour; // Makes it PST
+      distance = temp.getTime() - temp.getTimezoneOffset() * minute + 8 * hour - countDown; // Makes it PST
 
       if (distance >= 0) {
          let dayOut = "<span>" + dayVal + "</span>days"
